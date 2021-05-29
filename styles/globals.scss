@@ -18,8 +18,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Josefin Sans", cursive;
 }
 
 a {
@@ -28,6 +27,18 @@ a {
 }
 
 // Home
+// Components
+.outlined-button {
+  border: 1px solid var(--black);
+  text-transform: uppercase;
+  padding: 0.5em 2em;
+}
+.outlined-button:active {
+  background: var(--black);
+  color: var(--white);
+  border: 1px solid transparent;
+}
+// Sections
 header {
   position: fixed;
   top: 0;
@@ -44,15 +55,8 @@ header {
 .hamburger {
 }
 .logo {
-}
-.mobile-nav {
-  display: none;
-}
-.mobile-list {
-}
-.mobile-item {
-}
-.mobile-link {
+  color: var(--white);
+  font-weight: 600;
 }
 
 .hero {
@@ -61,18 +65,50 @@ header {
   align-items: center;
   width: 100%;
   min-height: 70vh;
-  background: url("/mobile/image-hero.jpg");
-  background-position: top center;
-  background-size: cover;
+  position: relative;
 }
-@media screen and (min-width: 800px) {
-  .hero {
-    width: 100%;
-    min-height: 100vh;
-    background: url("/desktop/image-hero.jpg");
-    background-size: cover;
+.hero__img {
+  position: absolute;
+  z-index: -1;
+}
+.hero__content {
+  color: var(--white);
+  padding: 1em;
+  border: 3px solid var(--white);
+}
+
+.interactive-vr {
+  display: flex;
+  flex-flow: column;
+
+  h2 {
+  }
+  p {
   }
 }
 
-.hero-content {
+.our-creations {
+  display: flex;
+  flex-flow: column;
+  & > * {
+    margin-top: 1rem;
+  }
+  .creation-card {
+    background: red;
+    display: flex;
+    position: relative;
+    min-height: 15vh;
+    .img-wrapper {
+      position: relative;
+      width: 100%;
+      min-height: 100%;
+    }
+    .title {
+      position: absolute;
+      left: 0.25em;
+      bottom: 0.25em;
+      z-index: 2;
+      color: var(--white);
+    }
+  }
 }

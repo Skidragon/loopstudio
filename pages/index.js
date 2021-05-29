@@ -1,3 +1,4 @@
+import NavigationBar from "components/NavigationBar/NavigationBar";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.scss";
@@ -11,65 +12,35 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        <div className="top-bar">
-          <div className="logo">loopstudios</div>
-          <div style={{ height: "100%", maxWidth: 20 }}>
-            <Image
-              className="hamburger"
-              height={20}
-              width={20}
-              layout="fixed"
-              priority
-              src="/icon-hamburger.svg"
-            />
-          </div>
-        </div>
-        <nav className="mobile-nav">
-          <img src="images/icon-close.svg" alt="close navigation trigger" />
-          <ul className="mobile-list">
-            <li className="mobile-item">
-              <a href="#" className="mobile-link">
-                About
-              </a>
-            </li>
-            <li className="mobile-item">
-              <a href="#" className="mobile-link">
-                Careers
-              </a>
-            </li>
-            <li className="mobile-item">
-              <a href="#" className="mobile-link">
-                Events
-              </a>
-            </li>
-            <li className="mobile-item">
-              <a href="#" className="mobile-link">
-                Products
-              </a>
-            </li>
-            <li className="mobile-item">
-              <a href="#" className="mobile-link">
-                Support
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <NavigationBar isOpen={true}>
+          <a href="#">About</a>
+          <a href="#">Careers</a>
+          <a href="#">Events</a>
+          <a href="#">Products</a>
+          <a href="#">Support</a>
+        </NavigationBar>
       </header>
       <section className="hero">
+        <Image
+          src="/desktop/image-hero.jpg"
+          layout="fill"
+          objectFit="cover"
+          objectPosition="50%"
+          className="hero__img"
+          quality={80}
+        />
         <div className="hero__content">
           <h1>Immersive experiences that Deliver</h1>
         </div>
       </section>
       <main>
         <section className="interactive-vr">
-          <picture>
-            <source
-              srcset="images/desktop/image-interactive.jpg"
-              media="(min-width: 800px)"
-            />
-            <source srcset="images/mobile/image-interactive.jpg" />
-            <img src="images/desktop/image-interactive.jpg" alt="" />
-          </picture>
+          <Image
+            src="/desktop/image-interactive.jpg"
+            layout="responsive"
+            width="731"
+            height="500"
+          />
           <h2>The Leader in Interactive VR</h2>
           <p>
             Founded in 2011, Loopstudios has been producing world-class virtual
@@ -78,24 +49,32 @@ export default function Home() {
             digital experiences that bind to their brand.
           </p>
         </section>
+
         <section className="our-creations">
           <h2>Our Creations</h2>
-          <picture className="creation deep-earth">
-            <source
-              srcset="images/desktop/image-deep-earth.jpg"
-              media="(min-width: 800px)"
-            />
-            <source srcset="images/mobile/image-deep-earth.jpg" />
-            <img src="images/desktop/image-deep-earth.jpg" alt="" />
-          </picture>
-          <picture className="creation night-arcade">
-            <source
-              srcset="images/desktop/image-night-arcade.jpg"
-              media="(min-width: 800px)"
-            />
-            <source srcset="images/mobile/image-night-arcade.jpg" />
-            <img src="images/desktop/image-night-arcade.jpg" alt="" />
-          </picture>
+          <div className="creation-card">
+            <h3 className="title">Deep Earth</h3>
+            <div className="img-wrapper">
+              <Image
+                src="/desktop/image-deep-earth.jpg"
+                layout="fill"
+                objectFit="cover"
+                quality={90}
+              />
+            </div>
+          </div>
+          <div className="creation-card">
+            <h3 className="title">Night Arcade</h3>
+            <div className="img-wrapper">
+              <Image
+                src="/desktop/image-night-arcade.jpg"
+                layout="fill"
+                objectFit="cover"
+                quality={90}
+              />
+            </div>
+          </div>
+          <button className="outlined-button">See All</button>
         </section>
       </main>
       <footer>
