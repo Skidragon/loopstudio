@@ -1,0 +1,15 @@
+.logo {
+}
+.logo__path {
+  stroke: hsl(0, 100%, 77%);
+  stroke-width: 2px;
+  stroke-dasharray: 996;
+  stroke-dashoffset: 996;
+  animation: sign 5s ease forwards;
+}
+@keyframes sign {
+  to {
+    fill: white;
+    stroke-dashoffset: 0;
+  }
+}

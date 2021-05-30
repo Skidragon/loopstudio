@@ -1,9 +1,16 @@
 import NavigationBar from "components/NavigationBar/NavigationBar";
 import Head from "next/head";
 import Image from "next/image";
+import { useInView } from "react-intersection-observer";
 import styles from "../styles/Home.module.scss";
 
 export default function Home() {
+  const { ref: heroObserverRef, entry } = useInView({
+    threshold: 0.75,
+    rootMargin: "0px 0px 0px 0px",
+    initialInView: true,
+  });
+
   return (
     <div>
       <Head>
@@ -12,7 +19,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        <NavigationBar isOpen={true}>
+        <NavigationBar inView={!entry?.isIntersecting}>
           <a href="#">About</a>
           <a href="#">Careers</a>
           <a href="#">Events</a>
@@ -20,7 +27,7 @@ export default function Home() {
           <a href="#">Support</a>
         </NavigationBar>
       </header>
-      <section className="hero">
+      <section className="hero" ref={heroObserverRef}>
         <Image
           src="/desktop/image-hero.jpg"
           layout="fill"
@@ -41,13 +48,15 @@ export default function Home() {
             width="731"
             height="500"
           />
-          <h2>The Leader in Interactive VR</h2>
-          <p>
-            Founded in 2011, Loopstudios has been producing world-class virtual
-            reality projects for some of the best companies around the globe.
-            Our award-winning creations have transformed businesses through
-            digital experiences that bind to their brand.
-          </p>
+          <div className="content">
+            <h2>The Leader in Interactive VR</h2>
+            <p>
+              Founded in 2011, Loopstudios has been producing world-class
+              virtual reality projects for some of the best companies around the
+              globe. Our award-winning creations have transformed businesses
+              through digital experiences that bind to their brand.
+            </p>
+          </div>
         </section>
 
         <section className="our-creations">
@@ -60,6 +69,8 @@ export default function Home() {
                 layout="fill"
                 objectFit="cover"
                 quality={90}
+                objectPosition={"100% 75%"}
+                className="image"
               />
             </div>
           </div>
@@ -71,6 +82,7 @@ export default function Home() {
                 layout="fill"
                 objectFit="cover"
                 quality={90}
+                className="image"
               />
             </div>
           </div>

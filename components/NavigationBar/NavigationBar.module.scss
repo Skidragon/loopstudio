@@ -1,16 +1,63 @@
+.none {
+  display: none;
+}
+@keyframes addBackground {
+  0% {
+    background: transparent;
+  }
+  100% {
+    background: black;
+  }
+}
+@keyframes removeBackground {
+  0% {
+    background: black;
+  }
+  100% {
+    background: transparent;
+  }
+}
+.contrast-from-bg {
+  animation-name: addBackground;
+  animation-duration: 500ms;
+  animation-fill-mode: forwards;
+}
+.navigation-bar-remove-bg {
+  animation-name: removeBackground;
+  animation-duration: 500ms;
+  animation-fill-mode: forwards;
+}
+
 .initial-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
-  z-index: 101;
+  z-index: 1001;
+  padding: 1em;
 
   .list {
     display: none;
   }
 }
 
-.mobile-nav {
+@keyframes openMobile {
+  0% {
+    clip-path: circle(0% at 0% 0%);
+  }
+  100% {
+    clip-path: circle(100% at 50% 50%);
+  }
+}
+@keyframes closeMobile {
+  0% {
+    clip-path: circle(100% at 50% 50%);
+  }
+  100% {
+    clip-path: circle(0% at 0% 0%);
+  }
+}
+@mixin mobile-nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,8 +65,21 @@
   top: 0;
   bottom: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 1000;
   background: var(--black);
+}
+.mobile-nav-active {
+  @include mobile-nav;
+  animation-name: openMobile;
+  animation-duration: 500ms;
+  animation-fill-mode: forwards;
+}
+.mobile-nav-inactive {
+  @include mobile-nav;
+  animation-name: closeMobile;
+  animation-duration: 500ms;
+  animation-fill-mode: both;
+  animation-direction: forward;
 }
 .mobile-list {
   color: var(--white);
@@ -43,7 +103,7 @@
   width: 100%;
   padding: 0.25em 0;
 }
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 550px) {
   .mobile-nav,
   .hamburger,
   .close-icon {

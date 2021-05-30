@@ -1,0 +1,7 @@
+.hamburger {
+  fill: var(--white);
+  cursor: pointer;
+  &:focus {
+    outline: 2px solid orange;
+  }
+}
