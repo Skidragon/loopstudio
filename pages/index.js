@@ -29,7 +29,6 @@ export default function Home({ pageLinks, creationCards }) {
     rootMargin: "0px 0px 0px 0px",
     initialInView: true,
   });
-  console.log(creationCards);
 
   return (
     <div>
