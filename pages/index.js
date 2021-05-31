@@ -105,7 +105,7 @@ export default function Home({ pageLinks, creationCards, socialMedia }) {
               </li>
             );
           })}
-          <OutlinedButton>See All</OutlinedButton>
+          <OutlinedButton href="#">See All</OutlinedButton>
         </section>
       </main>
       <footer>
