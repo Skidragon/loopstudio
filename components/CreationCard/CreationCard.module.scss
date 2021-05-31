@@ -4,6 +4,13 @@
   width: 100%;
   min-height: 8rem;
   cursor: pointer;
+
+  &:hover {
+    filter: brightness(150%);
+    .title {
+      color: var(--white);
+    }
+  }
 }
 .link {
   position: absolute;
