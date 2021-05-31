@@ -1,7 +1,19 @@
 .link {
   display: inline-block;
   padding: 0.5em;
-  &:hover {
-    text-decoration: underline;
+  position: relative;
+  &::before {
+    content: "";
+    width: 2px;
+    height: 1px;
+    background: transparent;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 3ch;
+    transform: translateX(-1.5ch);
+  }
+  &:hover::before {
+    background: var(--white);
   }
 }
