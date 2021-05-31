@@ -52,9 +52,9 @@ export default function Home({ pageLinks, creationCards, socialMedia }) {
         <NavigationBar inContrastMode={!entry?.isIntersecting}>
           {pageLinks.map((link) => {
             return (
-              <a href={link.href} key={link.text}>
+              <Link href={link.href} key={link.text}>
                 {link.text}
-              </a>
+              </Link>
             );
           })}
         </NavigationBar>
