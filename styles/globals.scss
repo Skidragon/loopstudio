@@ -43,6 +43,10 @@ svg,
 img {
   display: inline-block;
 }
+ul,
+ol {
+  padding: 0;
+}
 .hide {
   display: none;
 }
@@ -126,5 +130,45 @@ header {
   }
   & > * {
     margin-top: 1rem;
+  }
+}
+footer {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  color: var(--white);
+  background: var(--black);
+  margin-top: 2em;
+  padding: 3em 0;
+  ul.pages {
+    text-align: center;
+    & > li {
+      list-style-type: none;
+    }
+    & li:first-child {
+      margin-top: 2em;
+    }
+    & li + li {
+      margin-top: 1em;
+    }
+  }
+  ul.social-list {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    width: 100%;
+    margin-top: 2em;
+    & > li {
+      list-style-type: none;
+    }
+    & li:first-child {
+      margin-top: 2em;
+    }
+    & li + li {
+      margin-left: 1em;
+    }
+  }
+  .copyright {
+    margin-top: 2em;
   }
 }

@@ -1,8 +1,13 @@
 import { CreationCard } from "components/CreationCard/CreationCard";
+import FacebookIcon from "components/FacebookIcon/FacebookIcon";
+import InstagramIcon from "components/InstagramIcon/InstagramIcon";
 import Link from "components/Link/Link";
 import Logo from "components/Logo/Logo";
 import NavigationBar from "components/NavigationBar/NavigationBar";
 import OutlinedButton from "components/OutlinedButton/OutlinedButton";
+import PinterestIcon from "components/PinterestIcon/PinterestIcon";
+import { SVGLink } from "components/SVGLink/SVGLink";
+import TwitterIcon from "components/TwitterIcon/TwitterIcon";
 import Head from "next/head";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
@@ -15,21 +20,27 @@ export async function getStaticProps() {
   const creationCards = await creationCardsRes.json();
   const pageLinksRes = await fetch(`http://localhost:3000/data/pageLinks.json`);
   const pageLinks = await pageLinksRes.json();
+
+  const socialMediaRes = await fetch(
+    `http://localhost:3000/data/socialMedia.json`
+  );
+  const socialMedia = await socialMediaRes.json();
   return {
     props: {
       pageLinks,
       creationCards,
+      socialMedia,
     },
   };
 }
 
-export default function Home({ pageLinks, creationCards }) {
+export default function Home({ pageLinks, creationCards, socialMedia }) {
   const { ref: heroObserverRef, entry } = useInView({
     threshold: 0.75,
     rootMargin: "0px 0px 0px 0px",
     initialInView: true,
   });
-
+  const { facebook, twitter, instagram, pinterest } = socialMedia;
   return (
     <div>
       <Head>
@@ -99,8 +110,7 @@ export default function Home({ pageLinks, creationCards }) {
       </main>
       <footer>
         <Logo />
-
-        <ul className="pages-list">
+        <ul className="pages">
           {pageLinks.map((link) => {
             return (
               <li key={link.text}>
@@ -111,33 +121,21 @@ export default function Home({ pageLinks, creationCards }) {
             );
           })}
         </ul>
-        {/* <ul className="social-list">
+
+        <ul className="social-list">
           <li className="social-list__item">
-            <a href="#" className="social-list__link">
-              About
-            </a>
+            <SVGLink href={facebook.href} svgElement={<FacebookIcon />} />
           </li>
           <li className="social-list__item">
-            <a href="#" className="social-list__link">
-              Careers
-            </a>
+            <SVGLink href={instagram.href} svgElement={<InstagramIcon />} />
           </li>
           <li className="social-list__item">
-            <a href="#" className="social-list__link">
-              Events
-            </a>
+            <SVGLink href={pinterest.href} svgElement={<PinterestIcon />} />
           </li>
           <li className="social-list__item">
-            <a href="#" className="social-list__link">
-              Products
-            </a>
+            <SVGLink href={twitter.href} svgElement={<TwitterIcon />} />
           </li>
-          <li className="social-list__item">
-            <a href="#" className="social-list__link">
-              Support
-            </a>
-          </li>
-        </ul> */}
+        </ul>
         <div className="copyright">2021 Loopstudios. All rights reserved</div>
       </footer>
     </div>

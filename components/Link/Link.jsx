@@ -2,10 +2,10 @@ import NextLink from "next/link";
 import styles from "./Link.module.scss";
 import cn from "classnames";
 
-export default function Link({ children, ...props }) {
+export default function Link({ children, className = "", ...props }) {
   return (
-    <NextLink {...props} className={cn([styles.link, props.className])}>
-      <a>{children}</a>
+    <NextLink {...props}>
+      <a className={cn([styles.link, props.className])}>{children}</a>
     </NextLink>
   );
 }
