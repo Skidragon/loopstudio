@@ -39,15 +39,7 @@ export default function NavigationBar({
       window.removeEventListener("keyup", exitMobileNav);
     };
   }, []);
-  const getMobileNavClass = () => {
-    if (open) {
-      return styles["mobile-nav-active"];
-    }
-    if (wasOpened && !open) {
-      return styles["mobile-nav-inactive"];
-    }
-    return styles["none"];
-  };
+
   return (
     <div
       {...props}
@@ -104,7 +96,7 @@ export default function NavigationBar({
       <nav
         className={cn([
           open ? styles["mobile-nav-active"] : "",
-          !open && wasOpened ? styles["mobile-nav-inactive"] : "",
+          !open && wasOpened ? styles["mobile-nav-inactive"] : "hide",
         ])}
       >
         <ul className={styles["mobile-list"]}>

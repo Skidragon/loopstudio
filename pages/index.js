@@ -19,7 +19,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        <NavigationBar inView={!entry?.isIntersecting}>
+        <NavigationBar inContrastMode={!entry?.isIntersecting}>
           <a href="#">About</a>
           <a href="#">Careers</a>
           <a href="#">Events</a>
