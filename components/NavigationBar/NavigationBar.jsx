@@ -53,7 +53,7 @@ export default function NavigationBar({
       ])}
     >
       <div className={styles["bar-content"]}>
-        <Logo className={styles["logo"]} />
+        <Logo className={styles["logo"]} animate={inContrastMode} />
         <nav className={styles.nav}>
           <ul className={styles.list}>
             {children.map((child) => {

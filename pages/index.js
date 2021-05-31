@@ -1,15 +1,35 @@
+import { CreationCard } from "components/CreationCard/CreationCard";
+import Link from "components/Link/Link";
+import Logo from "components/Logo/Logo";
 import NavigationBar from "components/NavigationBar/NavigationBar";
+import OutlinedButton from "components/OutlinedButton/OutlinedButton";
 import Head from "next/head";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 import styles from "../styles/Home.module.scss";
 
-export default function Home() {
+export async function getStaticProps() {
+  const creationCardsRes = await fetch(
+    `http://localhost:3000/data/creationCards.json`
+  );
+  const creationCards = await creationCardsRes.json();
+  const pageLinksRes = await fetch(`http://localhost:3000/data/pageLinks.json`);
+  const pageLinks = await pageLinksRes.json();
+  return {
+    props: {
+      pageLinks,
+      creationCards,
+    },
+  };
+}
+
+export default function Home({ pageLinks, creationCards }) {
   const { ref: heroObserverRef, entry } = useInView({
     threshold: 0.75,
     rootMargin: "0px 0px 0px 0px",
     initialInView: true,
   });
+  console.log(creationCards);
 
   return (
     <div>
@@ -20,11 +40,13 @@ export default function Home() {
       </Head>
       <header>
         <NavigationBar inContrastMode={!entry?.isIntersecting}>
-          <a href="#">About</a>
-          <a href="#">Careers</a>
-          <a href="#">Events</a>
-          <a href="#">Products</a>
-          <a href="#">Support</a>
+          {pageLinks.map((link) => {
+            return (
+              <a href={link.href} key={link.text}>
+                {link.text}
+              </a>
+            );
+          })}
         </NavigationBar>
       </header>
       <section className="hero" ref={heroObserverRef}>
@@ -61,64 +83,36 @@ export default function Home() {
 
         <section className="our-creations">
           <h2>Our Creations</h2>
-          <div className="creation-card">
-            <h3 className="title">Deep Earth</h3>
-            <div className="img-wrapper">
-              <Image
-                src="/desktop/image-deep-earth.jpg"
-                layout="fill"
-                objectFit="cover"
-                quality={90}
-                objectPosition={"100% 75%"}
-                className="image"
-              />
-            </div>
-          </div>
-          <div className="creation-card">
-            <h3 className="title">Night Arcade</h3>
-            <div className="img-wrapper">
-              <Image
-                src="/desktop/image-night-arcade.jpg"
-                layout="fill"
-                objectFit="cover"
-                quality={90}
-                className="image"
-              />
-            </div>
-          </div>
-          <button className="outlined-button">See All</button>
+          {creationCards.map((card) => {
+            return (
+              <li key={card.title}>
+                <CreationCard
+                  title={card.title}
+                  src={card.src}
+                  objectPosition={card.objectPosition}
+                  key={card.title}
+                />
+              </li>
+            );
+          })}
+          <OutlinedButton>See All</OutlinedButton>
         </section>
       </main>
       <footer>
-        <div className="logo">loopstudios</div>
+        <Logo />
+
         <ul className="pages-list">
-          <li className="pages-list__item">
-            <a href="#" className="pages-list__link">
-              About
-            </a>
-          </li>
-          <li className="pages-list__item">
-            <a href="#" className="pages-list__link">
-              Careers
-            </a>
-          </li>
-          <li className="pages-list__item">
-            <a href="#" className="pages-list__link">
-              Events
-            </a>
-          </li>
-          <li className="pages-list__item">
-            <a href="#" className="pages-list__link">
-              Products
-            </a>
-          </li>
-          <li className="pages-list__item">
-            <a href="#" className="pages-list__link">
-              Support
-            </a>
-          </li>
+          {pageLinks.map((link) => {
+            return (
+              <li key={link.text}>
+                <Link href={link.href} className="pages-list__link">
+                  {link.text}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
-        <ul className="social-list">
+        {/* <ul className="social-list">
           <li className="social-list__item">
             <a href="#" className="social-list__link">
               About
@@ -144,7 +138,7 @@ export default function Home() {
               Support
             </a>
           </li>
-        </ul>
+        </ul> */}
         <div className="copyright">2021 Loopstudios. All rights reserved</div>
       </footer>
     </div>

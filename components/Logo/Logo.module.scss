@@ -1,4 +1,5 @@
 .logo {
+  fill: white;
 }
 .logo__path {
   stroke: hsl(0, 100%, 77%);
@@ -9,7 +10,6 @@
 }
 @keyframes sign {
   to {
-    fill: white;
     stroke-dashoffset: 0;
   }
 }

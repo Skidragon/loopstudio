@@ -1,0 +1,42 @@
+[
+    {
+        "title": "Deep Earth",
+        "src": "/desktop/image-deep-earth.jpg",
+        "objectPosition": "right 80%"
+    },
+    {
+        "title": "Night Arcade",
+        "src": "/desktop/image-night-arcade.jpg",
+        "objectPosition": "center 40%"
+    },
+    {
+        "title": "Soccer Team VR",
+        "src": "/desktop/image-soccer-team.jpg",
+        "objectPosition": "center top"
+    },
+    {
+        "title": "The Grid",
+        "src": "/desktop/image-grid.jpg",
+        "objectPosition": "center center"
+    },
+    {
+        "title": "From Up Above VR",
+        "src": "/desktop/image-from-above.jpg",
+        "objectPosition": "right bottom"
+    },
+    {
+        "title": "Pocket Borealis",
+        "src": "/desktop/image-pocket-borealis.jpg",
+        "objectPosition": "center center"
+    },
+    {
+        "title": "The Curiosity",
+        "src": "/desktop/image-curiosity.jpg",
+        "objectPosition": "center top"
+    },
+    {
+        "title": "Make It Fisheye",
+        "src": "/desktop/image-fisheye.jpg",
+        "objectPosition": "center center"
+    }
+]
