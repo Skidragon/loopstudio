@@ -8,19 +8,23 @@ import cn from "classnames";
 // https://css-tricks.com/accessible-svgs/
 // https://bennettfeely.com/clippy/
 // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex
-export default function NavigationBar({ inView = false, children, ...props }) {
+export default function NavigationBar({
+  inContrastMode = false,
+  children,
+  ...props
+}) {
   const [open, setOpen] = useState(false);
-  const [hasOpenBefore, setHasOpenBefore] = useState(false);
-  const [wasInView, setWasInView] = useState(false);
+  const [wasOpened, setWasOpened] = useState(false);
+  const [wasInContrasMode, setWasInContrastMode] = useState(false);
   useEffect(() => {
-    if (inView) {
-      setWasInView(true);
+    if (inContrastMode) {
+      setWasInContrastMode(true);
     }
-  }, [inView]);
+  }, [inContrastMode]);
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
-      setHasOpenBefore(true);
+      setWasOpened(true);
     } else {
       document.body.style.overflow = "unset";
     }
@@ -39,20 +43,24 @@ export default function NavigationBar({ inView = false, children, ...props }) {
     if (open) {
       return styles["mobile-nav-active"];
     }
-    if (hasOpenBefore && !open) {
+    if (wasOpened && !open) {
       return styles["mobile-nav-inactive"];
     }
     return styles["none"];
   };
   return (
     <div
-      className={cn({
-        [styles["navigation-bar"]]: true,
-        [styles["navigation-bar-remove-bg"]]: !inView && wasInView,
-        [styles["contrast-from-bg"]]: inView,
-      })}
+      {...props}
+      className={cn([
+        styles["navigation-bar"],
+        !inContrastMode && wasInContrasMode
+          ? styles["navigation-bar-remove-bg"]
+          : "",
+        inContrastMode ? styles["contrast-from-bg"] : "",
+        props.className,
+      ])}
     >
-      <div className={styles["initial-content"]}>
+      <div className={styles["bar-content"]}>
         <Logo className={styles["logo"]} />
         <nav className={styles.nav}>
           <ul className={styles.list}>
@@ -93,7 +101,12 @@ export default function NavigationBar({ inView = false, children, ...props }) {
           />
         )}
       </div>
-      <nav className={getMobileNavClass()}>
+      <nav
+        className={cn([
+          open ? styles["mobile-nav-active"] : "",
+          !open && wasOpened ? styles["mobile-nav-inactive"] : "",
+        ])}
+      >
         <ul className={styles["mobile-list"]}>
           {children.map((child) => {
             return (
