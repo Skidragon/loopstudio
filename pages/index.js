@@ -12,7 +12,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 import homeStyles from "styles/Home.module.scss";
-const BASE_URL = "https://loopstudio-qmg659vv1-skidragon.vercel.app/api";
+const BASE_URL = "https://loopstudio-nu.vercel.app/api";
 export async function getStaticProps() {
   const creationCardsRes = await fetch(`${BASE_URL}/creation-cards`);
   const creationCards = await creationCardsRes.json();
