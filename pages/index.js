@@ -12,18 +12,15 @@ import Head from "next/head";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 import homeStyles from "styles/Home.module.scss";
-
+const BASE_URL = `http://localhost:3000/api`;
 export async function getStaticProps() {
-  const creationCardsRes = await fetch(
-    `http://localhost:3000/data/creationCards.json`
-  );
+  const creationCardsRes = await fetch(`${BASE_URL}/creation-cards`);
   const creationCards = await creationCardsRes.json();
-  const pageLinksRes = await fetch(`http://localhost:3000/data/pageLinks.json`);
+
+  const pageLinksRes = await fetch(`${BASE_URL}/page-links`);
   const pageLinks = await pageLinksRes.json();
 
-  const socialMediaRes = await fetch(
-    `http://localhost:3000/data/socialMedia.json`
-  );
+  const socialMediaRes = await fetch(`${BASE_URL}/social-media`);
   const socialMedia = await socialMediaRes.json();
   return {
     props: {
