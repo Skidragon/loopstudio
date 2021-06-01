@@ -12,26 +12,29 @@ import Head from "next/head";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 import homeStyles from "styles/Home.module.scss";
-const BASE_URL = `http://localhost:3000/api`;
-export async function getStaticProps() {
-  const creationCardsRes = await fetch(`${BASE_URL}/creation-cards`);
-  const creationCards = await creationCardsRes.json();
+// export async function getStaticProps() {
+//   const creationCardsRes = await fetch(`${BASE_URL}/creation-cards`);
+//   const creationCards = await creationCardsRes.json();
 
-  const pageLinksRes = await fetch(`${BASE_URL}/page-links`);
-  const pageLinks = await pageLinksRes.json();
+//   const pageLinksRes = await fetch(`${BASE_URL}/page-links`);
+//   const pageLinks = await pageLinksRes.json();
 
-  const socialMediaRes = await fetch(`${BASE_URL}/social-media`);
-  const socialMedia = await socialMediaRes.json();
-  return {
-    props: {
-      pageLinks,
-      creationCards,
-      socialMedia,
-    },
-  };
-}
+//   const socialMediaRes = await fetch(`${BASE_URL}/social-media`);
+//   const socialMedia = await socialMediaRes.json();
+//   return {
+//     props: {
+//       pageLinks,
+//       creationCards,
+//       socialMedia,
+//     },
+//   };
+// }
 
-export default function Home({ pageLinks, creationCards, socialMedia }) {
+export default function Home({
+  pageLinks = [],
+  creationCards = [],
+  socialMedia = {},
+}) {
   const { ref: heroObserverRef, entry } = useInView({
     threshold: 0.75,
     rootMargin: "0px 0px 0px 0px",
@@ -49,8 +52,8 @@ export default function Home({ pageLinks, creationCards, socialMedia }) {
         <NavigationBar inContrastMode={!entry?.isIntersecting}>
           {pageLinks.map((link) => {
             return (
-              <Link href={link.href} key={link.text}>
-                {link.text}
+              <Link href={link?.href || "#"} key={link?.text || ""}>
+                {link?.text || ""}
               </Link>
             );
           })}
@@ -141,16 +144,25 @@ export default function Home({ pageLinks, creationCards, socialMedia }) {
 
         <ul className={homeStyles["social-list"]}>
           <li className="social-list__item">
-            <SVGLink href={facebook.href} svgElement={<FacebookIcon />} />
+            <SVGLink
+              href={facebook?.href || "#"}
+              svgElement={<FacebookIcon />}
+            />
           </li>
           <li className="social-list__item">
-            <SVGLink href={instagram.href} svgElement={<InstagramIcon />} />
+            <SVGLink
+              href={instagram?.href || "#"}
+              svgElement={<InstagramIcon />}
+            />
           </li>
           <li className="social-list__item">
-            <SVGLink href={pinterest.href} svgElement={<PinterestIcon />} />
+            <SVGLink
+              href={pinterest?.href || "#"}
+              svgElement={<PinterestIcon />}
+            />
           </li>
           <li className="social-list__item">
-            <SVGLink href={twitter.href} svgElement={<TwitterIcon />} />
+            <SVGLink href={twitter?.href || "#"} svgElement={<TwitterIcon />} />
           </li>
         </ul>
         <div className={homeStyles["copyright"]}>
