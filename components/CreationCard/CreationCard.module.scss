@@ -4,12 +4,29 @@
   width: 100%;
   min-height: 8rem;
   cursor: pointer;
-
-  &:hover {
-    filter: brightness(150%);
-    .title {
-      color: var(--white);
-    }
+  & .title {
+    color: var(--white);
+    transition: color 250ms ease-in 100ms;
+  }
+  &:hover .title {
+    color: var(--black);
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    background: white;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: scaleX(0%);
+    transform-origin: center center;
+    transition: transform 250ms ease-out 0ms;
+    opacity: 0.5;
+  }
+  &:hover::before {
+    transform: scaleX(100%);
   }
 }
 .link {
